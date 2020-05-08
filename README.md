@@ -16,7 +16,7 @@ npm install
 
 - Change into the app directory
 ```
-cd react-gallery-app
+cd myreads
 ```
 
 - Start the server
