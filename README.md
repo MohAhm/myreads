@@ -24,6 +24,15 @@ cd myreads
 npm start
 ```
 
+## The Hierarchy of The App:
+
+```
+|- App
+|- FindBooks
+|- ListBooks
+|-- Book
+```
+
 ## Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). 
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
