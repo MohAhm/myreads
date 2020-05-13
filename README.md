@@ -4,22 +4,22 @@ A bookshelf app that allows users to select and categorize books they have read,
 
 ## Project Setup
 
-- Clone the project
+1. Clone the project
 ```
 git clone https://github.com/MohAhm/myreads.git
 ```
 
-1. Change into the app directory
+2. Change into the app directory
 ```
 cd myreads
 ```
 
-2. Install the dependencies
+3. Install the dependencies
 ```
 npm install
 ```
 
-3. Start the application
+4. Start the application
 ```
 npm start
 ```
