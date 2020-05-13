@@ -1,22 +1,23 @@
 import React from 'react';
 
+
 const Book = props => {
-    // console.log('Props', props);
+    const { id, imageLinks, shelf, title, authors, updateShelf } = props;
 
     return(
-        <li key={props.id}>
+        <li key={id}>
             <div className='book'>
                 <div className='book-top'>
                     <div
                         className='book-cover'
                         style={{
-                            width: 128,
-                            height: 200,
-                            backgroundImage: `url(${props.imageLinks})`
+                            backgroundImage: `url(${imageLinks})`
                         }}>
                     </div>
-                    <div className="book-shelf-changer">
-                        <select>
+                    <div className='book-shelf-changer'>
+                        <select
+                            value={shelf}
+                            onChange={(event) => updateShelf(id, event)}>
                             <option value="move" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
@@ -25,12 +26,11 @@ const Book = props => {
                         </select>
                     </div>
                 </div>
-
                 <div className='book-title'>
-                    {props.title}
+                    {title}
                 </div>
                 <div className='book-authors'>
-                    {props.authors}
+                    {authors}
                 </div>
             </div>
         </li>

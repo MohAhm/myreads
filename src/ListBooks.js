@@ -1,30 +1,36 @@
-import React, { Component } from 'react';
-import Book from './Book';
+import React from 'react';
+import Bookshelf from './Bookshelf';
 
-class ListBooks extends Component {
-    render() {
-        console.log('Props', this.props);
 
-        return(
-            <div className='bookshelf'>
-                <h2 className='bookshelf-title'>Currently Reading</h2>
+const ListBooks = props => {
+    const { shelves, books, updateShelf } = props;
+    const booksByShelf = {};
 
-                <div className='bookshelf-books'>
-                    <ol className='books-grid'>
-                        {this.props.books.map((book) => (
-                            <Book
-                                key={book.id}
-                                imageLinks={book.imageLinks.thumbnail}
-                                shelf={book.shelf}
-                                title={book.title}
-                                authors={book.authors}
-                            />
-                        ))}
-                    </ol>
-                </div>
-            </div>
-        );
-    }
+    books.forEach(book => {
+        const sehlfID = book.shelf;
+        if (booksByShelf[sehlfID]) {
+            booksByShelf[sehlfID].push(book.id);
+        }
+        else {
+            booksByShelf[sehlfID] = [book.id];
+        }
+    });
+
+    const bookshelf = Object.keys(shelves).map(id => (
+        <Bookshelf
+            key={id}
+            booksByShelf={booksByShelf[shelves[id].shelf]}
+            shelfInfo={shelves[id]}
+            books={books}
+            updateShelf={updateShelf}
+        />
+    ));
+
+    return (
+        <div className='list-books-content'>
+            {bookshelf}
+        </div>
+    );
 }
 
 export default ListBooks;
