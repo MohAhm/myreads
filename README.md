@@ -9,17 +9,17 @@ A bookshelf app that allows users to select and categorize books they have read,
 git clone https://github.com/MohAhm/myreads.git
 ```
 
-- Install the dependencies
-```
-npm install
-```
-
-- Change into the app directory
+1. Change into the app directory
 ```
 cd myreads
 ```
 
-- Start the server
+2. Install the dependencies
+```
+npm install
+```
+
+3. Start the application
 ```
 npm start
 ```
@@ -28,9 +28,10 @@ npm start
 
 ```
 |- App
-|- FindBooks
+|- SearchBooks
 |- ListBooks
-|-- Book
+|-- Bookshelf
+|--- Book
 ```
 
 ## Create React App
