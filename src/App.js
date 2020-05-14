@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import * as BooksAPI from './utils/BooksAPI';
 import ListBooks from './ListBooks';
+import SearchBooks from './SearchBooks';
 import './App.css';
 
 
@@ -23,7 +25,6 @@ class App extends Component {
 
 	state = {
 		books: [],
-		showSearchPage: false,
 	};
 
 	componentDidMount() {
@@ -52,15 +53,26 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className='App'>
-				<div className='list-books-title'>
-					<h1>MyReads</h1>
+			<div className='app'>
+				<div className='list-books'>
+					<div className='list-books-title'>
+						<h1>MyReads</h1>
+					</div>
+
+					<Route
+						exact
+						path='/'
+						render={() => (
+							<ListBooks
+								shelves={shelves}
+								books={this.state.books}
+								updateShelf={this.updateShelves}
+							/>
+						)}
+					/>
+
+					<Route path='/search' component={SearchBooks} />
 				</div>
-				<ListBooks
-					shelves={shelves}
-					books={this.state.books}
-					updateShelf={this.updateShelves}
-				/>
 			</div>
 		);
 	}

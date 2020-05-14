@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Bookshelf from './Bookshelf';
 
 
@@ -30,6 +31,10 @@ const ListBooks = props => {
     return (
         <div className='list-books-content'>
             {bookshelf}
+
+            <div className="open-search">
+                <Link to='/search'>Add a book</Link>
+            </div>
         </div>
     );
 }
