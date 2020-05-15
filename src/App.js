@@ -54,25 +54,25 @@ class App extends Component {
 	render() {
 		return (
 			<div className='app'>
-				<div className='list-books'>
-					<div className='list-books-title'>
-						<h1>MyReads</h1>
-					</div>
+				<Route
+					exact
+					path='/'
+					render={() => (
+						<div className='list-books'>
+							<div className='list-books-title'>
+								<h1>MyReads</h1>
+							</div>
 
-					<Route
-						exact
-						path='/'
-						render={() => (
 							<ListBooks
 								shelves={shelves}
 								books={this.state.books}
 								updateShelf={this.updateShelves}
 							/>
-						)}
-					/>
+						</div>
+					)}
+				/>
 
-					<Route path='/search' component={SearchBooks} />
-				</div>
+				<Route path='/search' component={SearchBooks} />
 			</div>
 		);
 	}
