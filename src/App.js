@@ -49,12 +49,28 @@ class App extends Component {
             })
 	}
 
+	bookExists = bookId => {
+        const books = this.state.books;
+
+        for (let book of books) {
+            if (book.id === bookId) {
+                return true;
+            }
+		}
+
+		return false;
+	}
+
 	handleAddBook = (book, shelf) => {
 		BooksAPI.get(book.id)
 			.then((book) => {
-				this.setState(() => ({
-					books: this.state.books.concat([book])
-				}))
+				const bookExists = this.bookExists(book.id);
+
+				if (!bookExists) {
+					this.setState(() => ({
+						books: this.state.books.concat([book])
+					}))
+				}
 
 				this.updateShelves(book, shelf)
 			})
