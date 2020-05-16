@@ -22,7 +22,6 @@ const shelves = {
 };
 
 class App extends Component {
-
 	state = {
 		books: [],
 	};
@@ -36,20 +35,30 @@ class App extends Component {
 			})
 	}
 
-	updateShelves = (bookId, event) => {
-		const currState = this.state.books;
-		const book = currState.filter((b) => b.id === bookId)[0];
-
-		const shelf = event.target.value;
-		book.shelf = shelf;
-
+	updateShelves = (book, shelf) => {
         BooksAPI.update(book, shelf)
 			.then(() => {
-				this.setState({
-					books: currState
-				})
+				const currBooks = this.state.books;
+				const updateBook = currBooks.filter((b) => b.id === book.id)[0];
+
+				updateBook.shelf = shelf;
+
+				this.setState(() => ({
+					books: currBooks
+				}))
             })
-    }
+	}
+
+	handleAddBook = (book, shelf) => {
+		BooksAPI.get(book.id)
+			.then((book) => {
+				this.setState(() => ({
+					books: this.state.books.concat([book])
+				}))
+
+				this.updateShelves(book, shelf)
+			})
+	}
 
 	render() {
 		return (
@@ -64,15 +73,23 @@ class App extends Component {
 							</div>
 
 							<ListBooks
-								shelves={shelves}
 								books={this.state.books}
+								shelves={shelves}
 								updateShelf={this.updateShelves}
 							/>
 						</div>
 					)}
 				/>
 
-				<Route path='/search' component={SearchBooks} />
+				<Route
+					path='/search'
+					render={() => (
+						<SearchBooks
+							books={this.state.books}
+							updateShelf={this.handleAddBook}
+						/>
+					)}
+				/>
 			</div>
 		);
 	}

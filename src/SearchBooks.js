@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as BooksAPI from './utils/BooksAPI';
 import Book from './Book';
 
@@ -12,9 +13,9 @@ class SearchBooks extends Component {
     updateQuery = (query) => {
         this.setState(() => ({
             query: query
-        }))
+        }));
 
-        this.searchBooks(query)
+        this.searchBooks(query);
     }
 
     searchBooks = (query) => {
@@ -32,8 +33,21 @@ class SearchBooks extends Component {
         }
     }
 
+    getShelf = book => {
+        const currBooks = this.props.books;
+
+        for (let currBook of currBooks) {
+            if (currBook.id === book.id) {
+                return currBook.shelf;
+            }
+        }
+
+        return 'none';
+    }
+
     render() {
         const { query, results } = this.state;
+        const updateShelf = this.props.updateShelf;
 
         return (
             <div className="search-books">
@@ -55,11 +69,9 @@ class SearchBooks extends Component {
                         {results && results.length > 0 && results.map((book) => (
                             <Book
                                 key={book.id}
-                                id={book.id}
-                                imageLinks={book.imageLinks ? book.imageLinks.thumbnail : ''}
-                                title={book.title}
-                                shelf={book.shelf ? book.shelf : 'none'}
-                                authors={book.authors ? book.authors : []}
+                                book={book}
+                                shelf={this.getShelf(book)}
+                                updateShelf={updateShelf}
                             />
                         ))}
                     </ol>
@@ -67,6 +79,11 @@ class SearchBooks extends Component {
             </div>
          );
     }
+}
+
+SearchBooks.propTypes = {
+    books: PropTypes.array.isRequired,
+    updateShelf: PropTypes.func.isRequired,
 }
 
 export default SearchBooks;

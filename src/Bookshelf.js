@@ -19,11 +19,7 @@ const Bookshelf = props => {
                                     books.filter(book => book.id === bookId).map((book) => (
                                         <Book
                                             key={book.id}
-                                            id={book.id}
-                                            imageLinks={book.imageLinks.thumbnail}
-                                            shelf={book.shelf}
-                                            title={book.title}
-                                            authors={book.authors}
+                                            book={book}
                                             updateShelf={updateShelf}
                                         />
                                     ))
