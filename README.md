@@ -24,15 +24,6 @@ npm install
 npm start
 ```
 
-## The Hierarchy of The App:
-
-```
-|- App
-|- SearchBooks
-|- ListBooks
-|-- Bookshelf
-|--- Book
-```
 
 ## Create React App
 

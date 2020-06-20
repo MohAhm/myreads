@@ -3,22 +3,24 @@ import PropTypes from 'prop-types';
 
 
 const Book = props => {
-    const { book, updateShelf, shelf } = props;
+    const { book, shelf, updateShelf } = props;
+
+    const thumbnail = book.imageLinks ? book.imageLinks.thumbnail : '';
+    const title = book.title ? book.title : '';
+    const authors = book.authors ? book.authors : [];
 
     return(
-        <li key={book.id}>
+        <li>
             <div className='book'>
                 <div className='book-top'>
                     <div
                         className='book-cover'
-                        style={{
-                            backgroundImage: `url(${book.imageLinks ? book.imageLinks.thumbnail : ''})`
-                        }}>
+                        style={{ backgroundImage: `url(${thumbnail})` }}>
                     </div>
                     <div className='book-shelf-changer'>
                         <select
-                            value={book.shelf ? book.shelf : shelf}
-                            onChange={(event) => updateShelf(book, event.target.value)}>
+                            value={shelf}
+                            onChange={e => updateShelf(book, e.target.value)}>
                             <option value="move" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
@@ -28,10 +30,10 @@ const Book = props => {
                     </div>
                 </div>
                 <div className='book-title'>
-                    {book.title}
+                    {title}
                 </div>
                 <div className='book-authors'>
-                    {book.authors ? book.authors : []}
+                    {authors}
                 </div>
             </div>
         </li>
