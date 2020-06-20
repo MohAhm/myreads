@@ -17,14 +17,14 @@ class App extends Component {
 	}
 
 	handleUpdate = async (book, shelf) => {
-		const books = [...this.state.books];
 		book.shelf = shelf;
 
-		const updateBooks = books
-			.filter(b => b.id !== book.id)
-			.concat(book)
+		this.setState((currentState) => ({
+			books: currentState.books
+				.filter(b => b.id !== book.id)
+				.concat(book)
+		}));
 
-		this.setState({ books: updateBooks });
 		await update(book, shelf);
 	}
 
